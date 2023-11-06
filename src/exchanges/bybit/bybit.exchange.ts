@@ -148,7 +148,9 @@ export class BybitExchange extends BaseExchange {
     });
 
     // start websocket streams
-    this.publicWebsocket.connectAndSubscribe();
+    if (this.options.extra?.wsPublic) {
+      this.publicWebsocket.connectAndSubscribe();
+    }
     if (!isDemo) this.privateWebsocket.connectAndSubscribe();
 
     // start ticking live data

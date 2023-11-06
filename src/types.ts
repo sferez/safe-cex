@@ -31,6 +31,7 @@ export type ExchangeOptions = {
   readonly extra?: ExtraExchangeOptions & {
     tickInterval?: number;
     recvWindow?: number;
+    wsPublic?: boolean;
   };
 };
 
