@@ -115,7 +115,9 @@ export class BinanceExchange extends BaseExchange {
     });
 
     // start websocket streams
-    this.publicWebsocket.connectAndSubscribe();
+    if (this.options.extra?.wsPublic) {
+      this.publicWebsocket.connectAndSubscribe();
+    }
     this.privateWebsocket.connectAndSubscribe();
 
     // fetch current position mode (Hedge/One-way)

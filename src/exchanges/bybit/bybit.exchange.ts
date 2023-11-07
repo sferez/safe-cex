@@ -522,6 +522,7 @@ export class BybitExchange extends BaseExchange {
     return this.publicWebsocket.listenOrderBook(symbol, callback);
   };
 
+  // eslint-disable-next-line complexity
   placeOrder = async (opts: PlaceOrderOpts) => {
     if (
       opts.type === OrderType.StopLoss ||
@@ -540,6 +541,17 @@ export class BybitExchange extends BaseExchange {
 
     if (!market) {
       throw new Error(`Market ${opts.symbol} not found`);
+    }
+
+    if (opts.amountDollars) {
+      const ticker = this.store.tickers.find(
+        (t) => t.symbol === opts.symbol
+      ) as Ticker;
+      if (!ticker) {
+        throw new Error(`Ticker ${opts.symbol} not found`);
+      }
+      // eslint-disable-next-line no-param-reassign
+      opts.amount = opts.amountDollars / ticker.last;
     }
 
     const positionIdx = await this.getOrderPositionIdx(opts);

@@ -162,12 +162,13 @@ export type PlaceOrderOpts = {
   readonly symbol: string;
   readonly type: OrderType;
   readonly side: OrderSide;
-  readonly amount: number;
+  amount: number;
   readonly price?: number;
   readonly stopLoss?: number;
   readonly takeProfit?: number;
   readonly reduceOnly?: boolean;
   readonly timeInForce?: OrderTimeInForce;
+  readonly amountDollars?: number;
 };
 
 export type UpdateOrderOpts = {
