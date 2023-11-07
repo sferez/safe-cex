@@ -164,8 +164,8 @@ export type PlaceOrderOpts = {
   readonly side: OrderSide;
   amount: number;
   readonly price?: number;
-  readonly stopLoss?: number;
-  readonly takeProfit?: number;
+  stopLoss?: number;
+  takeProfit?: number;
   readonly reduceOnly?: boolean;
   readonly timeInForce?: OrderTimeInForce;
   readonly amountDollars?: number;

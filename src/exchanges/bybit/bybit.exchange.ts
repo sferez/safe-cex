@@ -543,13 +543,15 @@ export class BybitExchange extends BaseExchange {
       throw new Error(`Market ${opts.symbol} not found`);
     }
 
+    const ticker = this.store.tickers.find(
+      (t) => t.symbol === opts.symbol
+    ) as Ticker;
+
+    if (!ticker) {
+      throw new Error(`Ticker ${opts.symbol} not found`);
+    }
+
     if (opts.amountDollars) {
-      const ticker = this.store.tickers.find(
-        (t) => t.symbol === opts.symbol
-      ) as Ticker;
-      if (!ticker) {
-        throw new Error(`Ticker ${opts.symbol} not found`);
-      }
       // eslint-disable-next-line no-param-reassign
       opts.amount = opts.amountDollars / ticker.last;
     }
@@ -563,8 +565,12 @@ export class BybitExchange extends BaseExchange {
     const amount = adjust(opts.amount, pAmount);
 
     const price = opts.price ? adjust(opts.price, pPrice) : null;
-    const stopLoss = opts.stopLoss ? adjust(opts.stopLoss, pPrice) : null;
-    const takeProfit = opts.takeProfit ? adjust(opts.takeProfit, pPrice) : null;
+    const stopLoss = opts.stopLoss
+      ? adjust(ticker.last + opts.stopLoss * ticker.last, pPrice)
+      : null;
+    const takeProfit = opts.takeProfit
+      ? adjust(ticker.last + opts.takeProfit * ticker.last, pPrice)
+      : null;
     const timeInForce =
       inverseObj(ORDER_TIME_IN_FORCE)[
         opts.timeInForce || OrderTimeInForce.GoodTillCancel
