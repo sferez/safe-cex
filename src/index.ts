@@ -27,6 +27,8 @@ export const createExchange = (
   // start the virtual clock to contact exchanges
   // with a server timestamp
   virtualClock.start();
+  // eslint-disable-next-line no-console
+  console.log(`virtual clock started ${virtualClock}`);
 
   const Exchange = exchanges[exchangeName];
   return new Exchange(options, store || new DefaultStore());

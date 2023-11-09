@@ -49,7 +49,11 @@ export const createAPI = (options: ExchangeOptions) => {
         ? qs.stringify(config.params)
         : JSON.stringify(config.data);
 
+    // eslint-disable-next-line no-console
+    console.log('virtualClock', virtualClock);
     const timestamp = virtualClock.getCurrentTime().valueOf();
+    // eslint-disable-next-line no-console
+    console.log('timestamp', timestamp);
     const signature = createHmac('sha256', options.secret)
       .update([timestamp, options.key, RECV_WINDOW, data].join(''))
       .digest('hex');
