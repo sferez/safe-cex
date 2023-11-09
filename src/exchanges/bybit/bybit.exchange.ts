@@ -891,6 +891,7 @@ export class BybitExchange extends BaseExchange {
       unrealizedPnl: parseFloat(v(p, 'unrealisedPnl') || 0),
       contracts: parseFloat(p.size ?? 0),
       liquidationPrice: parseFloat(v(p, 'liqPrice') || 0),
+      timestamp: parseInt(v(p, 'updatedTime') || 0, 10),
     };
 
     return position;
