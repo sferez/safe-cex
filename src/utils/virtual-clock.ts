@@ -17,24 +17,6 @@ class VirtualClock {
 
       await this.syncClientServerTime();
       setInterval(() => this.syncClientServerTime(), 60_000);
-      setInterval(
-        () =>
-          // eslint-disable-next-line no-console
-          console.log('virtualClock', this),
-        5_000
-      );
-      setInterval(
-        () =>
-          // eslint-disable-next-line no-console
-          console.log('server', this.server),
-        5_000
-      );
-      setInterval(
-        () =>
-          // eslint-disable-next-line no-console
-          console.log('client', this.client),
-        5_000
-      );
     }
   };
 
@@ -49,14 +31,14 @@ class VirtualClock {
   };
 
   private syncClientServerTime = async () => {
-    // if (typeof window === 'undefined') {
-    //   // assume we are running onto a server
-    //   // this should have a better time sync
-    //   this.server = null;
-    //   this.client = null;
+    if (typeof window === 'undefined') {
+      // assume we are running onto a server
+      // this should have a better time sync
+      this.server = null;
+      this.client = null;
 
-    //   return;
-    // }
+      return;
+    }
 
     this.server = await this.fetchServerTime();
     this.client = dayjs.utc();
