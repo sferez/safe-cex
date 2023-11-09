@@ -2,6 +2,7 @@ import axios from 'axios';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import { get } from 'lodash';
 
 dayjs.extend(utc);
 
@@ -17,6 +18,24 @@ class VirtualClock {
 
       await this.syncClientServerTime();
       setInterval(() => this.syncClientServerTime(), 60_000);
+      setInterval(
+        () =>
+          // eslint-disable-next-line no-console
+          console.log('virtualClock', this),
+        5_000
+      );
+      setInterval(
+        () =>
+          // eslint-disable-next-line no-console
+          console.log('server', this.server),
+        5_000
+      );
+      setInterval(
+        () =>
+          // eslint-disable-next-line no-console
+          console.log('client', this.client),
+        5_000
+      );
     }
   };
 
