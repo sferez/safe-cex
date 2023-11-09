@@ -106,12 +106,15 @@ export class BybitExchange extends BaseExchange {
         if (data.retMsg.includes('timestamp and recv_window param')) {
           return 'Check your computer time and date';
         }
-
+        // eslint-disable-next-line no-console
+        console.log(data);
         return data.retMsg;
       }
 
       return '';
     } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
       return `Invalid API key or secret, ${err}`;
     }
   };
