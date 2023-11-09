@@ -72,9 +72,13 @@ export class BybitExchange extends BaseExchange {
 
     this.xhr = rateLimit(createAPI(opts), { maxRPS: 3 });
     this.unlimitedXHR = createAPI(opts);
+    // eslint-disable-next-line no-console
+    console.log('created api', this.xhr, this.unlimitedXHR);
 
     this.publicWebsocket = new BybitPublicWebsocket(this);
     this.privateWebsocket = new BybitPrivateWebsocket(this);
+    // eslint-disable-next-line no-console
+    console.log('created ws', this.publicWebsocket, this.privateWebsocket);
   }
 
   dispose = () => {
@@ -98,6 +102,8 @@ export class BybitExchange extends BaseExchange {
 
   validateAccount = async () => {
     try {
+      // eslint-disable-next-line no-console
+      console.log('Validating Bybit API key and secret');
       const { data } = await this.xhr.get(ENDPOINTS.ACCOUNT_MARGIN);
 
       if (data.retMsg !== 'OK') {
