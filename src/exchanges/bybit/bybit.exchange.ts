@@ -112,7 +112,7 @@ export class BybitExchange extends BaseExchange {
 
       return '';
     } catch (err) {
-      return 'Invalid API key or secret';
+      return `Invalid API key or secret, ${err}`;
     }
   };
 
@@ -522,7 +522,6 @@ export class BybitExchange extends BaseExchange {
     return this.publicWebsocket.listenOrderBook(symbol, callback);
   };
 
-  // eslint-disable-next-line complexity
   placeOrder = async (opts: PlaceOrderOpts) => {
     if (
       opts.type === OrderType.StopLoss ||
