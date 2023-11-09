@@ -49,14 +49,14 @@ class VirtualClock {
   };
 
   private syncClientServerTime = async () => {
-    if (typeof window === 'undefined') {
-      // assume we are running onto a server
-      // this should have a better time sync
-      this.server = null;
-      this.client = null;
+    // if (typeof window === 'undefined') {
+    //   // assume we are running onto a server
+    //   // this should have a better time sync
+    //   this.server = null;
+    //   this.client = null;
 
-      return;
-    }
+    //   return;
+    // }
 
     this.server = await this.fetchServerTime();
     this.client = dayjs.utc();
