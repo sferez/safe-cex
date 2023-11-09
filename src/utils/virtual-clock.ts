@@ -2,7 +2,6 @@ import axios from 'axios';
 import type { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
-import { get } from 'lodash';
 
 dayjs.extend(utc);
 
