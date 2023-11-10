@@ -133,7 +133,7 @@ export type Position = {
   readonly unrealizedPnl: number;
   readonly contracts: number;
   readonly liquidationPrice: number;
-  readonly timestamp?: number;
+  readonly timestamp: number | null;
 };
 
 export type Timeframe =
